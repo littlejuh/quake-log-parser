@@ -3,3 +3,8 @@
 source 'https://rubygems.org'
 
 ruby '3.1.0'
+gemspec
+
+group :test do
+  gem 'rspec'
+end
