@@ -3,5 +3,7 @@
 module FileReader
   def self.read_file(filepath:)
     raise ArgumentError, 'The file does not exists' unless File.exist?(filepath)
+
+    File.open(filepath)
   end
 end

@@ -12,4 +12,14 @@ describe FileReader do
       expect { subject }.to raise_error(ArgumentError)
     end
   end
+
+  context 'when the file exists' do
+    it 'should open' do
+      expect(File).to receive(:open)
+      subject
+    end
+    it 'cant raise exception' do
+      expect { subject }.not_to raise_error(ArgumentError)
+    end
+  end
 end
