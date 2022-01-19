@@ -8,8 +8,14 @@ trap('SIGINT') { exit! }
 module QuakeLogParser
   class CLI < Thor
     include Thor::Actions
+    LOG_FILE = './resources/qgames.log'
 
     map %w[-v --version] => :version
+
+    desc 'main', 'QuakeLogParser Main'
+    def main(log_path: LOG_FILE)
+      QuakeLogParser.new(log_path: log_path).main
+    end
 
     desc 'version', 'QuakeLogParser version'
     def version
