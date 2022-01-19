@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  tests:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,3 +14,13 @@ jobs:
       - run: make build
       - name: static analysis
         run: make lint
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+        with:
+          ruby-version: 3.0
+      - run: make build
+      - name: unit tests
+        run: make unit
