@@ -4,7 +4,7 @@ require File.expand_path('lib/quake_log_parser/version', __dir__)
 
 Gem::Specification.new do |spec|
   # Metadata
-  spec.required_ruby_version = '~> 3.1'
+  spec.required_ruby_version = '~> 3.0'
   spec.name = 'quakeLogParser'
   spec.version = QuakeLogParser::VERSION
   spec.authors = ['Juliana R Fernandes']
