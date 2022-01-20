@@ -27,7 +27,7 @@ describe QuakeLogParser::CLI do
     context 'with default file' do
       let(:log_path) { './resources/qgames.log' }
       it 'quake log parser should have been called' do
-        expect(parser_double).to receive(:main)
+        expect(parser_double).to receive(:execute)
         subject.main
       end
     end
@@ -36,7 +36,7 @@ describe QuakeLogParser::CLI do
       let(:log_path) { './resources/123abc.log' }
 
       it 'quake log parser should have been called' do
-        expect(parser_double).to receive(:main)
+        expect(parser_double).to receive(:execute)
         subject.main(log_path: log_path)
       end
     end

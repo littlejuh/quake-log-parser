@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require './lib/quake_log_parser/utils/file_reader'
 
-describe FileReader do
+describe QuakeLogParser::FileReaderUtil do
   let(:file_path) { 'fakefile.log' }
   subject { described_class.read_file(filepath: file_path) }
 
