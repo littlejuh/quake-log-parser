@@ -7,5 +7,9 @@ module QuakeLogParser
     def initialize
       @games = []
     end
+
+    def add_game(game:)
+      @games.push(game) unless @games.include?(game)
+    end
   end
 end

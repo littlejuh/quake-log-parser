@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 describe QuakeLogParser::LoglineService do
-  let(:log) { QuakeLogParser::Log.new }
+  let(:log) { double(QuakeLogParser::Log) }
   subject { described_class.new(log: log) }
 
-  context 'execute when InitLine' do
+  context '#execute InitGame line' do
     let(:init_game_line) do
       '0:00 InitGame:
       \sv_floodProtect\1\sv_maxPing\0\sv_minPing\0\sv_maxRate\10000\sv_minRate\0\sv_hostname\
@@ -15,12 +15,13 @@ describe QuakeLogParser::LoglineService do
        1.36 linux-x86_64 Apr 12 2009\protocol\68\mapname\q3dm17\gamename\baseq3\g_needpass\0'
     end
 
-    it 'should be true' do
-      expect(subject.execute(logline: init_game_line)).to be_truthy
+    it 'should add game' do
+      expect(log).to receive(:add_game)
+      subject.execute(logline: init_game_line)
     end
   end
 
-  context 'execute when other lines' do
+  context 'execute other lines' do
     let(:line) { 'abcd' }
 
     it 'should be false' do

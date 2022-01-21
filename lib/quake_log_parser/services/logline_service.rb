@@ -7,7 +7,10 @@ module QuakeLogParser
     end
 
     def execute(logline:)
-      return true if logline.match?(LoglineUtil::PATTERNS[:game])
+      if logline.match?(LoglineUtil::PATTERNS[:game])
+        @log.add_game(game: Game.new)
+        return true
+      end
 
       false
     end
