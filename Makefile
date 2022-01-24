@@ -1,3 +1,5 @@
+run: 
+	bundle exec bin/quake_log_parser main
 build:
 	bundle install
 unit:

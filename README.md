@@ -5,6 +5,8 @@ Project to parse the Quake log file
 * WIP
 ### Build:
 - `$ make build`
+### Run:
+- `$ make run`
 ### Run unit tests:
 - `$ make unit`
 ### Run static-analysis:

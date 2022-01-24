@@ -21,4 +21,15 @@ describe QuakeLogParser::Log do
       expect(subject.games.size).to eq 1
     end
   end
+  context '#last_game' do
+    let(:game) { double(QuakeLogParser::Game) }
+    let(:last_game) { double(QuakeLogParser::Game) }
+
+    it do
+      subject.add_game(game: game)
+      subject.add_game(game: last_game)
+      expect(subject.current_game).to eq(last_game)
+      expect(subject.current_game).to_not eq(game)
+    end
+  end
 end

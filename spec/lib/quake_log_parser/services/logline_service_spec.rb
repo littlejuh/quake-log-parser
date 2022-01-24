@@ -21,11 +21,37 @@ describe QuakeLogParser::LoglineService do
     end
   end
 
+  context '#execute Kill line' do
+    let(:game) { double(QuakeLogParser::Game) }
+    let(:killer_player) { double(QuakeLogParser::Player) }
+    let(:killed_player) { double(QuakeLogParser::Player) }
+    let(:kill) { double(QuakeLogParser::Kill) }
+    let(:kill_line) do
+      '22:06 Kill: 2 3 7: Isgalamido killed Mocinha by MOD_ROCKET_SPLASH'
+    end
+
+    before do
+      allow(log).to receive(:current_game).and_return(game)
+      allow(QuakeLogParser::Player).to receive(:new).with(name: 'Isgalamido').and_return(killer_player)
+      allow(QuakeLogParser::Player).to receive(:new).with(name: 'Mocinha').and_return(killed_player)
+      allow(QuakeLogParser::Kill).to receive(:new).with(killer: killer_player, killed: killed_player,
+                                                        cause: 'MOD_ROCKET_SPLASH').and_return(kill)
+    end
+
+    it 'should add kill in current game' do
+      expect(game).to receive(:add_player).with(player: killer_player)
+      expect(game).to receive(:add_player).with(player: killed_player)
+      expect(game).to receive(:add_kill).with(kill: kill)
+      expect(subject.execute(logline: kill_line)).to eql(log)
+    end
+  end
+
   context 'execute other lines' do
     let(:line) { 'abcd' }
 
-    it 'should be false' do
-      expect(subject.execute(logline: line)).not_to be_truthy
+    it 'should return empty log' do
+      expect(log).not_to receive(:current_game)
+      expect(subject.execute(logline: line)).to eql(log)
     end
   end
 end

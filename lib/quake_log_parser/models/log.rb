@@ -8,6 +8,10 @@ module QuakeLogParser
       @games = []
     end
 
+    def current_game
+      @games.last
+    end
+
     def add_game(game:)
       @games.push(game) unless @games.include?(game)
     end

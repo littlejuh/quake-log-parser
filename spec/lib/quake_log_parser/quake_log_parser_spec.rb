@@ -10,18 +10,25 @@ describe QuakeLogParser::QuakeLogParser do
       %w[
         InitGame
         Kill
+        Randon Line
       ]
     end
     let(:logline_service) { double(QuakeLogParser::LoglineService) }
+    let(:log) { double(QuakeLogParser::Log) }
+    let(:games) { [double(QuakeLogParser::Game), double(QuakeLogParser::Game)] }
+    let(:log_response) { double(QuakeLogParser::LogResponse) }
+
     before do
       allow(QuakeLogParser::FileReaderUtil).to receive(:read_file).and_return(log_content)
       allow(QuakeLogParser::LoglineService).to receive(:new).and_return(logline_service)
-      allow(logline_service).to receive(:execute)
+      allow(logline_service).to receive(:execute).and_return(log)
+      allow(log).to receive(:games).and_return(games)
+      allow(QuakeLogParser::LogResponse).to receive(:new).with(games: games).and_return(log_response)
     end
 
-    it 'should parse log content' do
+    it 'should return log response' do
       expect(logline_service).to receive(:execute).exactly(log_content.size).times
-      subject.execute
+      expect(subject.execute).to eql(log_response)
     end
   end
 end

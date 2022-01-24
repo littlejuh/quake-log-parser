@@ -11,8 +11,15 @@ module QuakeLogParser
       log_content = FileReaderUtil.read_file(filepath: @log_path)
       logline_service = LoglineService.new(log: @log)
       log_content.each do |log_line|
-        logline_service.execute(logline: log_line)
+        @log = logline_service.execute(logline: log_line)
       end
+      build_response
+    end
+
+    private
+
+    def build_response
+      LogResponse.new(games: @log.games)
     end
   end
 end

@@ -7,5 +7,9 @@ module QuakeLogParserInitializer
   require 'quake_log_parser/quake_log_parser'
   require 'quake_log_parser/models/log'
   require 'quake_log_parser/models/game'
+  require 'quake_log_parser/models/player'
+  require 'quake_log_parser/models/kill'
+  require 'quake_log_parser/models/responses/log_response'
+  require 'quake_log_parser/models/responses/game_response'
   require 'quake_log_parser/version'
 end
