@@ -2,7 +2,6 @@
 
 module QuakeLogParser
   class LoglineService
-
     def initialize(log:)
       @log = log
     end

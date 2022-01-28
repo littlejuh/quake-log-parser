@@ -13,6 +13,10 @@ module QuakeLogParser
       @players.push(player) if find_player(name: player.name).nil?
     end
 
+    def players_names
+      @players.map(&:name)
+    end
+
     def add_kill(kill:)
       @kills.push(kill) unless @kills.include?(kill)
     end

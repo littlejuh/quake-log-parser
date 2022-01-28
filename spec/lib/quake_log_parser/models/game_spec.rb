@@ -35,6 +35,24 @@ describe QuakeLogParser::Game do
     end
   end
 
+  context '#players_name' do
+    let(:name) { 'Fulaninho' }
+    let(:name_two) { 'Ciclaninho' }
+    let(:another_name) { 'Jujubinha' }
+    let(:player_one) { QuakeLogParser::Player.new(name: name) }
+    let(:player_two) { QuakeLogParser::Player.new(name: name_two) }
+    let(:another_player) { QuakeLogParser::Player.new(name: another_name) }
+    let(:expected_names) { [name, name_two, another_name] }
+
+    before do
+      subject.add_player(player: player_one)
+      subject.add_player(player: player_two)
+      subject.add_player(player: another_player)
+    end
+
+    it { expect(subject.players_names).to eq(expected_names) }
+  end
+
   context '#add_kill' do
     let(:kill) { double(QuakeLogParser::Kill) }
 
