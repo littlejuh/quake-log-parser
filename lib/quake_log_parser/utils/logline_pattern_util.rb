@@ -4,7 +4,7 @@ module QuakeLogParser
   class LoglineUtil
     PATTERNS = {
       game: /(?:^|\W)InitGame(?:$|\W)/,
-      kill: /\sKill:[\s|\d]+:\s(?<killer_name>\w+)\skilled\s(?<killed_name>[\w+|\s]+)\sby\s(?<mod_weapon>\w+)/,
+      kill: /\sKill:[\s|\d]+:\s(?<killer_name>[\w+|\s]+)\skilled\s(?<killed_name>[\w+|\s]+)\sby\s(?<mod_weapon>\w+)/,
       kill_by_world: /\sKill:\s1022[\s\d+]+:\s<world>\skilled\s(?<killed_name>[\w+|\s]+)\sby\s(?<mod_weapon>\w+)/
     }.freeze
 

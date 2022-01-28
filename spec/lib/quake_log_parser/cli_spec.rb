@@ -19,16 +19,22 @@ describe QuakeLogParser::CLI do
   end
 
   context 'when main command' do
-    let(:parser_double) { double(QuakeLogParser::QuakeLogParser) }
+    let(:json_output) { 'json output' }
+    let(:parser) { double(QuakeLogParser::QuakeLogParser) }
+    let(:log_response) { double(QuakeLogParser::LogResponse, render: json_output) }
+
     before do
-      allow(QuakeLogParser::QuakeLogParser).to receive(:new).with(log_path: log_path).and_return(parser_double)
+      allow(QuakeLogParser::QuakeLogParser).to receive(:new).with(log_path: log_path).and_return(parser)
+      allow(parser).to receive(:execute).and_return(log_response)
     end
 
     context 'with default file' do
       let(:log_path) { './resources/qgames.log' }
+
       it 'quake log parser should have been called' do
-        expect(parser_double).to receive(:execute)
-        subject.main
+        expect(parser).to receive(:execute)
+        expect(log_response).to receive(:render)
+        expect { subject.main }.to output(match(json_output)).to_stdout
       end
     end
 
@@ -36,8 +42,9 @@ describe QuakeLogParser::CLI do
       let(:log_path) { './resources/123abc.log' }
 
       it 'quake log parser should have been called' do
-        expect(parser_double).to receive(:execute)
-        subject.main(log_path: log_path)
+        expect(parser).to receive(:execute)
+        expect(log_response).to receive(:render)
+        expect { subject.main(log_path: log_path) }.to output(match(json_output)).to_stdout
       end
     end
   end

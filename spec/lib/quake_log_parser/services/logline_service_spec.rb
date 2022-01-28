@@ -23,6 +23,7 @@ describe QuakeLogParser::LoglineService do
 
   context '#execute Kill line' do
     let(:game) { double(QuakeLogParser::Game) }
+    let(:killer_name) { 'Isgalamido' }
     let(:killer_player) { double(QuakeLogParser::Player) }
     let(:killed_player) { double(QuakeLogParser::Player) }
     let(:kill) { double(QuakeLogParser::Kill) }
@@ -32,7 +33,8 @@ describe QuakeLogParser::LoglineService do
 
     before do
       allow(log).to receive(:current_game).and_return(game)
-      allow(QuakeLogParser::Player).to receive(:new).with(name: 'Isgalamido').and_return(killer_player)
+      allow(game).to receive(:find_player).with(name: killer_name).and_return(killer_player)
+      allow(QuakeLogParser::Player).to receive(:new).with(name: killer_name).and_return(killer_player)
       allow(QuakeLogParser::Player).to receive(:new).with(name: 'Mocinha').and_return(killed_player)
       allow(QuakeLogParser::Kill).to receive(:new).with(killer: killer_player, killed: killed_player,
                                                         cause: 'MOD_ROCKET_SPLASH').and_return(kill)

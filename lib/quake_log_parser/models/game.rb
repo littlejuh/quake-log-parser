@@ -21,8 +21,6 @@ module QuakeLogParser
       @kills.size
     end
 
-    private
-
     def find_player(name:)
       @players.find { |player| player.name.eql? name }
     end

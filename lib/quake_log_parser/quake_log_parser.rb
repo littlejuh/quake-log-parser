@@ -19,7 +19,7 @@ module QuakeLogParser
     private
 
     def build_response
-      LogResponse.new(games: @log.games)
+      LogResponse.new(log: @log)
     end
   end
 end

@@ -5,7 +5,7 @@ require 'spec_helper'
 describe QuakeLogParser::QuakeLogParser do
   subject { described_class.new(log_path: 'filepath') }
 
-  context 'execute' do
+  context '#execute' do
     let(:log_content) do
       %w[
         InitGame
@@ -23,10 +23,10 @@ describe QuakeLogParser::QuakeLogParser do
       allow(QuakeLogParser::LoglineService).to receive(:new).and_return(logline_service)
       allow(logline_service).to receive(:execute).and_return(log)
       allow(log).to receive(:games).and_return(games)
-      allow(QuakeLogParser::LogResponse).to receive(:new).with(games: games).and_return(log_response)
+      allow(QuakeLogParser::LogResponse).to receive(:new).with(log: log).and_return(log_response)
     end
 
-    it 'should return log response' do
+    it 'should get log response' do
       expect(logline_service).to receive(:execute).exactly(log_content.size).times
       expect(subject.execute).to eql(log_response)
     end

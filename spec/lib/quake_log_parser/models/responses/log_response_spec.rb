@@ -7,9 +7,10 @@ describe QuakeLogParser::LogResponse do
     let(:first_game) { QuakeLogParser::Game.new }
     let(:second_game) { QuakeLogParser::Game.new }
     let(:games) { [first_game, second_game] }
+    let(:log) { double(QuakeLogParser::Log, games: games) }
     let(:expected_response) { { 'game_1' => { total_kills: 0 }, 'game_2' => { total_kills: 0 } } }
 
-    subject { described_class.new(games: games) }
+    subject { described_class.new(log: log) }
     it { expect(subject.response).to eql(expected_response) }
   end
 end

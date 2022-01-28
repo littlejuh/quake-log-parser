@@ -14,7 +14,8 @@ module QuakeLogParser
 
     desc 'main', 'QuakeLogParser Main'
     def main(log_path: LOG_FILE)
-      QuakeLogParser.new(log_path: log_path).execute
+      parser = QuakeLogParser.new(log_path: log_path).execute
+      puts parser.render
     end
 
     desc 'version', 'QuakeLogParser version'

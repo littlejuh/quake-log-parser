@@ -4,8 +4,12 @@ module QuakeLogParser
   class LogResponse
     attr_reader :response
 
-    def initialize(games:)
-      @response = build_response(games: games)
+    def initialize(log:)
+      @response = build_response(games: log.games)
+    end
+
+    def render
+      JSON.pretty_generate(@response)
     end
 
     private
