@@ -7,7 +7,8 @@ module QuakeLogParser
     def initialize(game:)
       @response =
         {
-          'total_kills': game.total_kills
+          'total_kills': game.total_kills,
+          'players': game.players_names
         }
     end
   end
