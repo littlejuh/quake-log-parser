@@ -52,24 +52,24 @@ Also you can run using these installed dependencies:
 ### Run using Docker
 - Build project(install dependencies):
   - `make docker-build`
-- Run cli application(get report result):
+- Run QuakeLogParserCLI application(get report result):
   - `make docker-run`
 - Run tests(units with rspec):
   - `make docker-test`
 - Run static analysis(rubocop w/ automatic fix):
   - `make docker-lint`
-- Show CLI Quake Log Parser version:
+- Show QuakeLogParserCLI version:
   - `make docker-cli-version`
 
 ### Run
 - Build project(install dependencies):
   - `make build`
-- Run cli application(get report result):
+- Run QuakeLogParserCLI application(get report result):
   - `make run`
 - Run tests(units with rspec):
   - `make test`
 - Run static analysis(rubocop w/ automatic fix):
   - `make lint`
-- Show CLI Quake Log Parser version:
+- Show QuakeLogParserCLI version:
   - `make cli-version`
 ---
