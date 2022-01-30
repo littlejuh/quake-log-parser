@@ -21,7 +21,7 @@ describe QuakeLogParser::LoglineService do
     end
   end
 
-  context '#execute Kill line' do
+  context '#execute kill line' do
     let(:game) { double(QuakeLogParser::Game) }
     let(:killer_name) { 'Isgalamido' }
     let(:killer_player) { double(QuakeLogParser::Player) }

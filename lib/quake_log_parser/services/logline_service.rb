@@ -21,6 +21,8 @@ module QuakeLogParser
 
       add_players(players: [killer, killed])
 
+      killer&.score_point
+      killed.downscore
       kill = Kill.new(killer: killer, killed: killed, cause: LoglineUtil.kill_cause(line: logline))
 
       @log.current_game.add_kill(kill: kill)

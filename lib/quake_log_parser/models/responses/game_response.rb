@@ -8,7 +8,8 @@ module QuakeLogParser
       @response =
         {
           'total_kills': game.total_kills,
-          'players': game.players_names
+          'players': game.players_names,
+          'kills': game.players_score
         }
     end
   end

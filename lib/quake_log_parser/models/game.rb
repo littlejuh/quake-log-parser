@@ -13,8 +13,8 @@ module QuakeLogParser
       @players.push(player) if find_player(name: player.name).nil?
     end
 
-    def players_names
-      @players.map(&:name)
+    def find_player(name:)
+      @players.find { |player| player.name.eql? name }
     end
 
     def add_kill(kill:)
@@ -25,8 +25,16 @@ module QuakeLogParser
       @kills.size
     end
 
-    def find_player(name:)
-      @players.find { |player| player.name.eql? name }
+    def players_names
+      @players.map(&:name)
+    end
+
+    def players_score
+      players_score = {}
+      @players.each do |player|
+        players_score[player.name] = player.score
+      end
+      players_score
     end
   end
 end

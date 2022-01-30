@@ -9,7 +9,7 @@ describe QuakeLogParser::LogResponse do
     let(:games) { [first_game, second_game] }
     let(:log) { double(QuakeLogParser::Log, games: games) }
     let(:expected_response) do
-      { 'game_1' => { players: [], total_kills: 0 }, 'game_2' => { players: [], total_kills: 0 } }
+      { 'game_1' => { players: [], total_kills: 0, kills: {} }, 'game_2' => { players: [], total_kills: 0, kills: {} } }
     end
 
     subject { described_class.new(log: log) }
