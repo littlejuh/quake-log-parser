@@ -44,6 +44,8 @@ describe QuakeLogParser::LoglineService do
       expect(game).to receive(:add_player).with(player: killer_player)
       expect(game).to receive(:add_player).with(player: killed_player)
       expect(game).to receive(:add_kill).with(kill: kill)
+      expect(killer_player).to receive(:score_point)
+      expect(killed_player).to receive(:downscore)
       expect(subject.execute(logline: kill_line)).to eql(log)
     end
   end
