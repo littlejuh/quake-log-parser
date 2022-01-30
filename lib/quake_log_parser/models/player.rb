@@ -8,5 +8,10 @@ module QuakeLogParser
       @name = name
       @score = 0
     end
+
+    def score_point
+      @score += 1
+      @score
+    end
   end
 end
