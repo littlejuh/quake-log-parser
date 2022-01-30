@@ -2,7 +2,7 @@ run:
 	bundle exec bin/quake_log_parser main
 build:
 	bundle install
-unit:
+test:
 	bundle exec rspec
 lint:
 	bundle exec rubocop -A

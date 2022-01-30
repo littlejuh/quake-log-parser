@@ -23,4 +23,4 @@ jobs:
           ruby-version: 3.0
       - run: make build
       - name: unit tests
-        run: make unit
+        run: make test
