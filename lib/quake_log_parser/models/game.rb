@@ -36,5 +36,16 @@ module QuakeLogParser
       end
       players_score
     end
+
+    def kills_by_means
+      kill_causes = {}
+
+      @kills.each do |kill|
+        kill_causes[kill.cause] = 0 unless kill_causes.key?(kill.cause)
+        score = kill_causes[kill.cause]
+        kill_causes[kill.cause] = score + 1
+      end
+      kill_causes
+    end
   end
 end
