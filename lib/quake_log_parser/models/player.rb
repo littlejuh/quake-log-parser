@@ -13,5 +13,10 @@ module QuakeLogParser
       @score += 1
       @score
     end
+
+    def downscore
+      @score -= 1 if @score.positive?
+      @score
+    end
   end
 end
