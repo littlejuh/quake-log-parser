@@ -18,7 +18,7 @@ describe QuakeLogParser::CLI do
     end
   end
 
-  context 'when main command' do
+  context 'when successfully main command' do
     let(:json_output) { 'json output' }
     let(:parser) { double(QuakeLogParser::QuakeLogParser) }
     let(:log_response) { double(QuakeLogParser::LogResponse, render: json_output) }
@@ -45,6 +45,24 @@ describe QuakeLogParser::CLI do
         expect(parser).to receive(:execute)
         expect(log_response).to receive(:render)
         expect { subject.main(log_path: log_path) }.to output(match(json_output)).to_stdout
+      end
+    end
+  end
+
+  context 'when failure main command' do
+    context 'cant open file' do
+      let(:log_path) { './resources/123.log' }
+      let(:logger) { QuakeLogParser::Logger.new }
+      before do
+        allow(QuakeLogParser::Logger).to receive(:new).and_return(logger)
+        allow(QuakeLogParser::QuakeLogParser).to receive(:new)
+          .with(log_path: log_path).and_raise(ArgumentError, 'The file does not exists')
+      end
+
+      it 'quake log parser logger have been called' do
+        expect(logger).to receive(:info).with(message: 'started execute parse')
+        expect(logger).to receive(:error).with(message: 'an error has occurred. reason: The file does not exists')
+        expect { subject.main(log_path: log_path) }.to raise_error(StandardError)
       end
     end
   end
