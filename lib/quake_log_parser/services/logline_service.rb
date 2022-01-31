@@ -16,29 +16,7 @@ module QuakeLogParser
     private
 
     def execute_kill(logline:, world: false)
-      killer = create_killer(killer: LoglineUtil.killer(line: logline)) unless world
-      killed = Player.new(name: LoglineUtil.killed(line: logline))
-
-      add_players(players: [killer, killed])
-
-      killer&.score_point
-      killed.downscore
-      kill = Kill.new(killer: killer, killed: killed, cause: LoglineUtil.kill_cause(line: logline))
-
-      @log.current_game.add_kill(kill: kill)
-    end
-
-    def create_killer(killer:)
-      killer_player = @log.current_game.find_player(name: killer)
-      return Player.new(name: killer) if killer_player.nil?
-
-      killer_player
-    end
-
-    def add_players(players:)
-      players.each do |player|
-        @log.current_game.add_player(player: player) unless player.nil?
-      end
+      CurrentGameService.new.execute_kill(log: @log, logline: logline, world: world)
     end
   end
 end
